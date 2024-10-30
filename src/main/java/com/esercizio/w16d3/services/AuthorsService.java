@@ -1,10 +1,13 @@
-package epicode.u5d7hw.services;
+package com.esercizio.w16d3.services;
 
-import epicode.u5d7hw.entities.Author;
-import epicode.u5d7hw.exceptions.NotFoundException;
+import com.esercizio.w16d3.entities.Author;
+import com.esercizio.w16d3.exceptions.NotFoundException;
 import org.springframework.stereotype.Service;
 
-import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.ListIterator;
+import java.util.Random;
 
 @Service
 public class AuthorsService {
@@ -14,7 +17,7 @@ public class AuthorsService {
     public Author save(Author author) {
         Random rndm = new Random();
         author.setId(rndm.nextInt());
-        author.setAvatar("https://ui-avatars.com/api/?name="+ author.getName() + "+" + author.getSurname());
+        author.setAvatar("https://ui-avatars.com/api/?name=" + author.getName() + "+" + author.getSurname());
         this.authors.add(author);
         return author;
     }

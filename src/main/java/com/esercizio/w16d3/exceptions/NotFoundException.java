@@ -1,4 +1,4 @@
-package epicode.u5d7hw.exceptions;
+package com.esercizio.w16d3.exceptions;
 
 public class NotFoundException extends RuntimeException {
     public NotFoundException(String message) {

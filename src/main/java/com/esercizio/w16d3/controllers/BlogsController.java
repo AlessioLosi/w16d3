@@ -1,13 +1,12 @@
-package epicode.u5d7hw.controllers;
+package com.esercizio.w16d3.controllers;
 
-import epicode.u5d7hw.entities.Blogpost;
-import epicode.u5d7hw.exceptions.NotFoundException;
-import epicode.u5d7hw.services.BlogsService;
+import com.esercizio.w16d3.Payload.BlogpostPayload;
+import com.esercizio.w16d3.entities.Blogpost;
+import com.esercizio.w16d3.services.BlogsService;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.*;
-
-import java.util.List;
 
 @RestController
 @RequestMapping("/blogs")
@@ -16,16 +15,18 @@ public class BlogsController {
     BlogsService blogsService;
 
     // 1. - POST http://localhost:3001/blogs (+ req.body)
-    @PostMapping("")
-    @ResponseStatus(HttpStatus.CREATED) // <-- 201
-    public Blogpost saveBlog(@RequestBody Blogpost body) {
-        return blogsService.save(body);
+    @PostMapping
+    @ResponseStatus(HttpStatus.CREATED)
+    public BlogpostPayload save(@RequestBody BlogpostPayload body) {
+        return this.blogsService.save(body);
     }
 
+
     // 2. - GET http://localhost:3001/blogs
-    @GetMapping("")
-    public List<Blogpost> getBlogs() {
-        return blogsService.getBlogs();
+    @GetMapping
+    public Page<Blogpost> findAll(@RequestParam(defaultValue = "0") int page, @RequestParam(defaultValue = "10") int size,
+                                  @RequestParam(defaultValue = "id") String sortBy) {
+        return this.blogsService.findAll(page, size, sortBy);
     }
 
     // 3. - GET http://localhost:3001/blogs/{id}
