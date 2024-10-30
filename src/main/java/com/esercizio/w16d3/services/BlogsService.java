@@ -14,7 +14,6 @@ import org.springframework.stereotype.Service;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.ListIterator;
-import java.util.Random;
 
 @Service
 public class BlogsService {
@@ -22,11 +21,16 @@ public class BlogsService {
     @Autowired
     private BlogPostRepository blogPostRepository;
 
-    public BlogpostPayload save(BlogpostPayload blogpost) {
-        Random rndm = new Random();
-        blogpost.setCover("https://picsum.photos/200/300");
-        this.blogs.add(new Blogpost());
-        return blogpost;
+    public Blogpost save(BlogpostPayload blogpostPayload) {
+        Blogpost blogpost = new Blogpost();
+        blogpost.setCover(blogpostPayload.getCover());
+        blogpost.setCategory(blogpostPayload.getCategory());
+        blogpost.setTitle(blogpostPayload.getTitle());
+        blogpost.setContent(blogpostPayload.getContent());
+        blogpost.setReadingTime(blogpostPayload.getReadingTime());
+        blogpost.setAuthorId(blogpostPayload.getAuthorId());
+
+        return blogPostRepository.save(blogpost);
     }
 
     public Page<Blogpost> findAll(int page, int size, String sortBy) {

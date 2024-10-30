@@ -22,4 +22,8 @@ public class Blogpost {
     @ManyToOne
     @JoinColumn(name = "author_id", nullable = false)
     private Author author;
+
+    public void setAuthorId(int authorId) {
+
+    }
 }

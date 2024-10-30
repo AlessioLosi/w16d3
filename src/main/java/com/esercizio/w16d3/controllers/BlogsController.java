@@ -17,7 +17,7 @@ public class BlogsController {
     // 1. - POST http://localhost:3001/blogs (+ req.body)
     @PostMapping
     @ResponseStatus(HttpStatus.CREATED)
-    public BlogpostPayload save(@RequestBody BlogpostPayload body) {
+    public Blogpost save(@RequestBody BlogpostPayload body) {
         return this.blogsService.save(body);
     }
 
